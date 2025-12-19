@@ -1,0 +1,13 @@
+package com.uma.ecofridge.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "products")
+data class Product(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val name: String,
+    val category: String,
+    val expiryDate: Long, // Guardamos la fecha como Timestamp para operar fácil con ella
+    val quantity: Int
+)
