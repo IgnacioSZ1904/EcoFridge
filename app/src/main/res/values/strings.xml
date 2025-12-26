@@ -5,4 +5,13 @@
     <string name="cantidad">Quantity</string>
     <string name="boton_seleccionar_fecha_de_caducidad">Select expiration date</string>
     <string name="nombre_del_producto">Product name</string>
+    <string name="caduca_texto">Expires on: %1$d/%2$d/%3$d</string>
+    <string name="error_rellenar_campos">Please fill in all fields</string>
+    <string name="producto_guardado">Product saved</string>
+    <string name="dialog_delete_title">Delete product</string>
+    <string name="dialog_delete_msg">Are you sure you want to delete %1$s?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="card_expires">Expires: %1$s</string>
+    <string name="card_quantity">Quantity: %1$d</string>
 </resources>

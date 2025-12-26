@@ -6,4 +6,13 @@
     <string name="cantidad">Cantidad</string>
     <string name="boton_seleccionar_fecha_de_caducidad">Seleccionar fecha de caducidad</string>
     <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="caduca_texto">Caduca el: %1$d/%2$d/%3$d</string>
+    <string name="error_rellenar_campos">Por favor, rellena todos los campos</string>
+    <string name="producto_guardado">Producto guardado</string>
+    <string name="dialog_delete_title">Eliminar producto</string>
+    <string name="dialog_delete_msg">¿Estás seguro de que quieres eliminar %1$s?</string>
+    <string name="text_yes">Sí</string>
+    <string name="text_no">No</string>
+    <string name="card_expires">Caduca: %1$s</string>
+    <string name="card_quantity">Cantidad: %1$d</string>
 </resources>

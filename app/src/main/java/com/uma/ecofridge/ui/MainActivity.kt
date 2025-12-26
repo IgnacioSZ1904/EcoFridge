@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uma.ecofridge.R
 import com.uma.ecofridge.database.AppDatabase
 import com.uma.ecofridge.databinding.ActivityMainBinding
 import com.uma.ecofridge.model.Product
@@ -68,15 +69,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun mostrarDialogoBorrar(product: Product) {
         android.app.AlertDialog.Builder(this)
-            .setTitle("Eliminar producto")
-            .setMessage("¿Estás seguro de que quieres eliminar '${product.name}'?")
-            .setPositiveButton("SÍ") { dialog, _ ->
-                // OJO: Asegúrate de que tu variable del ViewModel se llama 'productViewModel'
-                // Si se llama diferente, cambia el nombre aquí abajo:
+            .setTitle(R.string.dialog_delete_title)
+            .setMessage(getString(R.string.dialog_delete_msg, product.name))
+
+            .setPositiveButton(R.string.text_yes) { dialog, _ ->
                 viewModel.delete(product)
                 dialog.dismiss()
             }
-            .setNegativeButton("NO") { dialog, _ ->
+            .setNegativeButton(R.string.text_no) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()

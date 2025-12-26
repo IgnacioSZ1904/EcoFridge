@@ -11,6 +11,7 @@ import com.uma.ecofridge.model.Product
 import com.uma.ecofridge.repository.ProductRepository
 import com.uma.ecofridge.ui.viewmodel.ProductViewModel
 import com.uma.ecofridge.ui.viewmodel.ProductViewModelFactory
+import com.uma.ecofridge.R
 import java.util.*
 
 class AddProductActivity : AppCompatActivity() {
@@ -39,7 +40,7 @@ class AddProductActivity : AppCompatActivity() {
             val selectedCalendar = Calendar.getInstance()
             selectedCalendar.set(year, month, day)
             selectedExpiryDate = selectedCalendar.timeInMillis
-            binding.tvSelectedDate.text = "Caduca el: $day/${month + 1}/$year"
+            binding.tvSelectedDate.text = getString(R.string.caduca_texto, day, month + 1, year)
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
@@ -51,7 +52,7 @@ class AddProductActivity : AppCompatActivity() {
 
         // 1. Validación de datos (Ingeniería de robustez)
         if (name.isBlank() || quantityStr.isBlank() || selectedExpiryDate == 0L) {
-            Snackbar.make(binding.root, "Por favor, rellena todos los campos", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.error_rellenar_campos, Snackbar.LENGTH_LONG).show()
             return
         }
 
@@ -66,7 +67,7 @@ class AddProductActivity : AppCompatActivity() {
         viewModel.insert(product)
 
         // 3. Feedback al usuario y cierre
-        Snackbar.make(binding.root, "Producto guardado", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, R.string.producto_guardado, Snackbar.LENGTH_SHORT).show()
 
         // Finalizamos la actividad para volver a la MainActivity
         finish()

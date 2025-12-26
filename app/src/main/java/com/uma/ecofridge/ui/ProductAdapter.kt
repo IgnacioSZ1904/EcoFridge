@@ -33,14 +33,20 @@ class ProductAdapter(
         return ProductViewHolder(view)
     }
 
-    // Se llama para "rellenar" los datos de una fila específica.
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val current = products[position]
-        holder.tvName.text = current.name
-        holder.tvQuantity.text = "Cantidad: ${current.quantity}"
+        // Obtenemos el contexto desde la vista para poder usar getString()
+        val context = holder.itemView.context
 
-        // Convertimos el Long (Timestamp) de la BD a una fecha legible.
-        holder.tvDate.text = "Caduca: ${dateFormat.format(Date(current.expiryDate))}"
+        holder.tvName.text = current.name
+
+        // Usamos el recurso R.string.card_quantity y le pasamos el número
+        holder.tvQuantity.text = context.getString(R.string.card_quantity, current.quantity)
+
+        // Primero formateamos la fecha como String
+        val dateString = dateFormat.format(Date(current.expiryDate))
+        // Luego la insertamos en la plantilla de texto traducible
+        holder.tvDate.text = context.getString(R.string.card_expires, dateString)
 
         // Configuración del botón de eliminar.
         holder.btnDelete.setOnClickListener {
