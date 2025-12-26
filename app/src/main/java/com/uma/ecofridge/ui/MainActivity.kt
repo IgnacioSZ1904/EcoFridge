@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uma.ecofridge.database.AppDatabase
 import com.uma.ecofridge.databinding.ActivityMainBinding
+import com.uma.ecofridge.model.Product
 import com.uma.ecofridge.repository.ProductRepository
 import com.uma.ecofridge.ui.viewmodel.ProductViewModel
 import com.uma.ecofridge.ui.viewmodel.ProductViewModelFactory
@@ -32,10 +33,14 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupNavigation()
+
+
     }
 
     private fun setupRecyclerView() {
-        val adapter = ProductAdapter()
+        val adapter = ProductAdapter{ product ->
+           mostrarDialogoBorrar(product)
+        }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -47,12 +52,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun setupNavigation() {
-        // Navegar a la actividad de añadir producto al pulsar el botón flotante
+        // 1. Botón flotante para AÑADIR
         binding.fabAdd.setOnClickListener {
             val intent = Intent(this, AddProductActivity::class.java)
             startActivity(intent)
         }
+
+        // 2. Botón de AJUSTES
+        binding.btnSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun mostrarDialogoBorrar(product: Product) {
+        android.app.AlertDialog.Builder(this)
+            .setTitle("Eliminar producto")
+            .setMessage("¿Estás seguro de que quieres eliminar '${product.name}'?")
+            .setPositiveButton("SÍ") { dialog, _ ->
+                // OJO: Asegúrate de que tu variable del ViewModel se llama 'productViewModel'
+                // Si se llama diferente, cambia el nombre aquí abajo:
+                viewModel.delete(product)
+                dialog.dismiss()
+            }
+            .setNegativeButton("NO") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 }

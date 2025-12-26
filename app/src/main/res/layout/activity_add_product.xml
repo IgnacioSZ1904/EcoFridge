@@ -15,7 +15,7 @@
             android:id="@+id/etProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del producto" />
+            android:hint="@string/nombre_del_producto" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -28,7 +28,7 @@
             android:id="@+id/etQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cantidad"
+            android:hint="@string/cantidad"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Seleccionar fecha de caducidad"
+        android:text="@string/boton_seleccionar_fecha_de_caducidad"
         app:layout_constraintTop_toBottomOf="@id/layoutQuantity" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Fecha no seleccionada"
+        android:text="@string/fecha_no_seleccionada"
         app:layout_constraintTop_toBottomOf="@id/btnDatePicker"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Guardar en EcoFridge"
+        android:text="@string/boton_guardar_en_EcoFridge"
         app:layout_constraintTop_toBottomOf="@id/tvSelectedDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

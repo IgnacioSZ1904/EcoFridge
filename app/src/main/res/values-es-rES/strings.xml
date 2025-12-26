@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EcoFridge</string>
+    <string name="fecha_no_seleccionada">Fecha no seleccionada</string>
+    <string name="boton_guardar_en_EcoFridge">Guardar en EcoFridge</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="boton_seleccionar_fecha_de_caducidad">Seleccionar fecha de caducidad</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+</resources>

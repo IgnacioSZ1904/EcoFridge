@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.uma.ecofridge.R
 import com.uma.ecofridge.model.Product
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private val onDeleteClick: (Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var products = emptyList<Product>()
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -20,6 +23,8 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
         val tvName: TextView = itemView.findViewById(R.id.tvProductName)
         val tvDate: TextView = itemView.findViewById(R.id.tvExpiryDate)
         val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
+
+        val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
     }
 
     // Se llama cuando el RecyclerView necesita una nueva fila (molde).
@@ -36,6 +41,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
 
         // Convertimos el Long (Timestamp) de la BD a una fecha legible.
         holder.tvDate.text = "Caduca: ${dateFormat.format(Date(current.expiryDate))}"
+
+        // Configuración del botón de eliminar.
+        holder.btnDelete.setOnClickListener {
+            onDeleteClick(current)
+        }
     }
 
     override fun getItemCount() = products.size

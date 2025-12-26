@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EcoFridge</string>
+    <string name="fecha_no_seleccionada">Date not selected</string>
+    <string name="boton_guardar_en_EcoFridge">Save in EcoFridge</string>
+    <string name="cantidad">Quantity</string>
+    <string name="boton_seleccionar_fecha_de_caducidad">Select expiration date</string>
+    <string name="nombre_del_producto">Product name</string>
 </resources>
