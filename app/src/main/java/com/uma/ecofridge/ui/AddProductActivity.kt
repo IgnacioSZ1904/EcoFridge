@@ -18,6 +18,7 @@ class AddProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddProductBinding
     private var selectedExpiryDate: Long = 0
+    private var currentProductId: Int = 0
 
     private val viewModel: ProductViewModel by viewModels {
         val database = AppDatabase.getDatabase(this)
@@ -30,6 +31,33 @@ class AddProductActivity : AppCompatActivity() {
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 1. CHEQUEO: ¿Me han pasado datos para editar?
+        if (intent.hasExtra("extra_id")) {
+            // ¡Sí! Estamos en MODO EDICIÓN
+            title = "Editar Producto" // Cambiamos el título de la barra superior
+            binding.btnSave.text = "Actualizar" // Opcional: cambiar texto del botón
+
+            // Recuperamos los datos
+            currentProductId = intent.getIntExtra("extra_id", 0)
+            val name = intent.getStringExtra("extra_name")
+            val quantity = intent.getIntExtra("extra_quantity", 1)
+            selectedExpiryDate = intent.getLongExtra("extra_expiry", 0)
+
+            // Rellenamos los campos visuales
+            binding.etProductName.setText(name)
+            binding.etQuantity.setText(quantity.toString())
+
+            // Mostramos la fecha recuperada
+            if (selectedExpiryDate != 0L) {
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = selectedExpiryDate
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val year = calendar.get(Calendar.YEAR)
+                // Usa getString con R.string.selected_date_format si lo tienes traducido
+                binding.tvSelectedDate.text = "$day/$month/$year"
+            }
+        }
         binding.btnDatePicker.setOnClickListener { showDatePicker() }
         binding.btnSave.setOnClickListener { saveProduct() }
     }
@@ -57,14 +85,18 @@ class AddProductActivity : AppCompatActivity() {
         }
 
         val product = Product(
+            id=currentProductId,
             name = name,
             category = "General", // Podrás ampliar esto con un Spinner más adelante
             expiryDate = selectedExpiryDate,
             quantity = quantityStr.toInt()
         )
-
-        // 2. Inserción asíncrona mediante ViewModel
-        viewModel.insert(product)
+        if(currentProductId==0){
+            // 2. Inserción asíncrona mediante ViewModel
+            viewModel.insert(product)
+        }else{
+            viewModel.update(product)
+        }
 
         // 3. Feedback al usuario y cierre
         Snackbar.make(binding.root, R.string.producto_guardado, Snackbar.LENGTH_SHORT).show()

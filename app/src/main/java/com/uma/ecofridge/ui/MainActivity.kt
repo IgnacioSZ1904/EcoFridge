@@ -34,14 +34,23 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupNavigation()
-
-
     }
 
     private fun setupRecyclerView() {
-        val adapter = ProductAdapter{ product ->
-           mostrarDialogoBorrar(product)
-        }
+        val adapter = ProductAdapter(
+            onDeleteClick = { product ->
+            mostrarDialogoBorrar(product)
+        },
+            onEditClick = { product ->
+                val intent = Intent(this, AddProductActivity::class.java)
+                // Pasamos los datos actuales para que los campos se rellenen solos
+                intent.putExtra("extra_id", product.id)
+                intent.putExtra("extra_name", product.name)
+                intent.putExtra("extra_quantity", product.quantity)
+                intent.putExtra("extra_expiry", product.expiryDate)
+                startActivity(intent)
+            }
+        )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 

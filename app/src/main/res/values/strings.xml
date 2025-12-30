@@ -14,4 +14,5 @@
     <string name="text_no">No</string>
     <string name="card_expires">Expires: %1$s</string>
     <string name="card_quantity">Quantity: %1$d</string>
+    <string name="ajustes">Settings</string>
 </resources>

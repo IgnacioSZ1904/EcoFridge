@@ -9,28 +9,35 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:minHeight="110dp"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Nombre del alimento"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEdit" />
 
         <TextView
             android:id="@+id/tvExpiryDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Caduca el: 00/00/0000"
-            android:textColor="#D32F2F" />
+            android:textColor="#D32F2F"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+            app:layout_constraintEnd_toStartOf="@+id/btnEdit" />
 
         <TextView
             android:id="@+id/tvQuantity"
@@ -38,16 +45,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Cantidad: 1"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExpiryDate" />
+
+        <ImageButton
+            android:id="@+id/btnEdit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Editar"
+            app:tint="?attr/colorControlNormal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
             android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@android:drawable/ic_menu_delete"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_gravity="end"
-            android:contentDescription="Eliminar"
-            android:padding="8dp" />
-    </LinearLayout>
+            android:contentDescription="Borrar"
+            app:tint="?attr/colorControlNormal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

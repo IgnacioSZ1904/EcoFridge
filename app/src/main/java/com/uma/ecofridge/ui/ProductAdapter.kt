@@ -12,7 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ProductAdapter(
-    private val onDeleteClick: (Product) -> Unit
+    private val onDeleteClick: (Product) -> Unit,
+    private val onEditClick: (Product) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var products = emptyList<Product>()
@@ -25,6 +26,8 @@ class ProductAdapter(
         val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
 
         val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
+
+        val btnEdit: ImageButton = itemView.findViewById(R.id.btnEdit)
     }
 
     // Se llama cuando el RecyclerView necesita una nueva fila (molde).
@@ -48,10 +51,9 @@ class ProductAdapter(
         // Luego la insertamos en la plantilla de texto traducible
         holder.tvDate.text = context.getString(R.string.card_expires, dateString)
 
-        // Configuración del botón de eliminar.
-        holder.btnDelete.setOnClickListener {
-            onDeleteClick(current)
-        }
+        holder.btnDelete.setOnClickListener { onDeleteClick(current) }
+
+        holder.btnEdit.setOnClickListener { onEditClick(current) }
     }
 
     override fun getItemCount() = products.size
